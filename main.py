@@ -2,11 +2,13 @@ import requests
 from bs4 import BeautifulSoup
 from slackclient import SlackClient
 from datetime import datetime
+from slackclient import SlackClient
+import time
 
 counter = 0
-time = datetime.now()
-today10h30am = time.replace(hour=10, minute=30, second=0, microsecond=0)
-today9h45am = time.replace(hour=9, minute=45, second=0, microsecond=0)
+temps = datetime.now()
+today10h30am = temps.replace(hour=10, minute=30, second=0, microsecond=0)
+today9h45am = temps.replace(hour=9, minute=45, second=0, microsecond=0)
 while counter < 1 and  today9h45am < time < today10h30am:
     r = requests.get('http://dites.bonjourmadame.fr/')
     c = r.content
@@ -23,5 +25,14 @@ while counter < 1 and  today9h45am < time < today10h30am:
         print("prems")
         image = timeStamp.find('a').findChildren('img')[0].get('src')
         print(image)
-
+        slack_token = ""
+        sc = SlackClient(slack_token)
+        sc.api_call(
+        "chat.postMessage",
+        channel="GBX2YBGN4",
+        text="Prem's "+image,
+        as_user=1
+        )
         counter +=1
+    else:
+        time.sleep(60)
