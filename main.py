@@ -8,8 +8,11 @@ import time
 counter = 0
 temps = datetime.now()
 today10h30am = temps.replace(hour=10, minute=30, second=0, microsecond=0)
-today9h45am = temps.replace(hour=9, minute=40, second=0, microsecond=0)
-while counter < 1 and  today9h45am < temps < today10h30am:
+today9h40am = temps.replace(hour=9, minute=40, second=0, microsecond=0)
+fichierTime = fichier2 = open('time.txt', 'a')
+fichierTime.write("script exécuté le "+str(temps))
+fichierTime.close()
+while counter < 1 and  today9h40am < temps < today10h30am:
     r = requests.get('http://dites.bonjourmadame.fr/')
     c = r.content
     soup = BeautifulSoup(c, "html.parser")
