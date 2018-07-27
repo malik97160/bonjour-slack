@@ -8,8 +8,8 @@ import time
 counter = 0
 temps = datetime.now()
 today10h30am = temps.replace(hour=10, minute=30, second=0, microsecond=0)
-today9h45am = temps.replace(hour=9, minute=45, second=0, microsecond=0)
-while counter < 1 and  today9h45am < time < today10h30am:
+today9h45am = temps.replace(hour=9, minute=40, second=0, microsecond=0)
+while counter < 1 and  today9h45am < temps < today10h30am:
     r = requests.get('http://dites.bonjourmadame.fr/')
     c = r.content
     soup = BeautifulSoup(c, "html.parser")
@@ -30,7 +30,7 @@ while counter < 1 and  today9h45am < time < today10h30am:
         sc.api_call(
         "chat.postMessage",
         channel="GBX2YBGN4",
-        text="Prem's "+image,
+        text="Preum's "+image,
         as_user=1
         )
         counter +=1
