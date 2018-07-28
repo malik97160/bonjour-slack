@@ -13,9 +13,9 @@ temps = datetime.now()
 today10h30am = temps.replace(hour=10, minute=30, second=0, microsecond=0)
 today9h40am = temps.replace(hour=9, minute=40, second=0, microsecond=0)
 fichierTime = fichier2 = open(path+'time.txt', 'a')
-fichierTime.write("script exécuté le "+str(temps))
+fichierTime.write("script exécuté le "+str(temps)+"\n")
 fichierTime.close()
-while counter < 1 and today9h40am <= time < today10h30am:
+while counter < 1 and today9h40am <= temps < today10h30am:
     r = requests.get('http://dites.bonjourmadame.fr/')
     c = r.content
     soup = BeautifulSoup(c, "html.parser")
@@ -32,7 +32,7 @@ while counter < 1 and today9h40am <= time < today10h30am:
         print(image)
         slack_token = slackToken
         sc = SlackClient(slack_token)
-        sc.api_call(
+        response = sc.api_call(
         "chat.postMessage",
         channel="GBX2YBGN4",
         text="Preum's "+image,
